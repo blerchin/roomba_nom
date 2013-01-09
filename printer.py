@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 #coding=utf-8
 import serial, time
 
@@ -36,7 +37,7 @@ class ThermalPrinter(object):
 
     BAUDRATE = 19200
     TIMEOUT = 3
-    SERIALPORT = '/dev/ttyO2'
+    SERIALPORT = '/dev/ttyAMA0'
     # pixels with more color value (average for multiple channels) are counted as white
     # tweak this if your images appear too black or too white
     black_threshold = 48
