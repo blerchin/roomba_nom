@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #coding=utf-8
-import printer, Image, ImageDraw, ImageStat, RPi.GPIO as GPIO
+import printer, Image, ImageDraw, ImageStat, RPi.GPIO as GPIO, File
 
 #halftone code based on StackOverflow post by fraxel
 def halftone(im, sample, scale):
@@ -35,19 +35,19 @@ def halftone(im, sample, scale):
 
 def print_job():
 	p = printer.ThermalPrinter(serialport="/dev/ttyAMA0")
-	i = Image.open("thumbs_up_large.png")
-	bb = i.getbbox()
-	ratio = bb[2] / bb[3]
+	i = Image.open("webcam.jpg")
+	ratio = i.size[0] / i.size[1] 
 	w = 384
 	h = w/ratio
-	i = i.resize(( w, h ))
-	i = halftone(i, 5, 1)
-	
+	i = i.resize((w, h ))
+	#i = halftone(i, 5, 2)
+	i = i.convert('1')
 	data = list(i.getdata())
 	p.print_bitmap(data, w, h , False)
 	p.linefeed()
 	p.linefeed()
 	p.linefeed()
+
 GPIO.setmode(GPIO.BCM)
 BUTTON =25 
 GPIO.setup(BUTTON, GPIO.IN)
