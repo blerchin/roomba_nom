@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 #coding=utf-8
 import printer, Image, ImageDraw, RPi.GPIO as GPIO, re
+import adc_photocell
 
 WEBCAM_PATTERN="webcam_images/webcam*.jpg"
 
@@ -27,13 +28,7 @@ def print_job():
 	p.linefeed()
 	p.linefeed()
 
-GPIO.setmode(GPIO.BCM)
-BUTTON =25 
-GPIO.setup(BUTTON, GPIO.IN)
-
 while True:
-	if GPIO.input(BUTTON):
-		print "Pressed!" 
+	if adc_photocell.is_bright(25):
 		print_job()
-
 

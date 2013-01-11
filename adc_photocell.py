@@ -61,15 +61,10 @@ photocell_adc = 1;
 last_read = 0       # this keeps track of the last potentiometer value
 tolerance = 5       # to keep from being jittery we'll only change
                     # volume when the pot has moved more than 5 'counts'
-def photocell_is_bright(threshold):
+def is_bright(threshold):
 	#read the analog pin
-	photocell = read_photocell()
-	return photocell > threshold
+	return read() > threshold
 
-def read_photocell():
+def read():
 	return readadc(photocell_adc, SPICLK, SPIMOSI, SPIMISO, SPICS)
-
-while True:
-	print read_photocell()
-
 
