@@ -29,6 +29,6 @@ def print_job():
 	p.linefeed()
 
 while True:
-	if adc_photocell.is_bright(25):
+	if adc_photocell.is_bright(800):
 		print_job()
 
